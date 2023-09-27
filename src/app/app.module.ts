@@ -6,10 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Add material module
 import { MaterialModule } from 'shared/material.module';
+import { LoginComponent } from './components/login/login.component';
+import { NavbarLoginComponent } from './components/navbar-login/navbar-login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    NavbarLoginComponent
   ],
   imports: [
     BrowserModule,
