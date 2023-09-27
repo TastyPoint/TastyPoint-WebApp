@@ -1,0 +1,25 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+footer{
+    background-color: #f0bc3c;
+    height: 220px;
+    padding: 8px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-group-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 220px;
+    width: 50%;
+}
+
+
