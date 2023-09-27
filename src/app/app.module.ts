@@ -8,12 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'shared/material.module';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarLoginComponent } from './components/navbar-login/navbar-login.component';
+import { FooterLoginComponent } from './components/footer-login/footer-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarLoginComponent
+    NavbarLoginComponent,
+    FooterLoginComponent
   ],
   imports: [
     BrowserModule,
