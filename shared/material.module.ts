@@ -17,7 +17,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     imports: [
@@ -37,7 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatTabsModule,
         MatSelectModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatCheckboxModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -56,7 +57,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatTabsModule,
         MatSelectModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatCheckboxModule
     ]
     
   })
