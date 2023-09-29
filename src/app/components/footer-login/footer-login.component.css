@@ -22,4 +22,14 @@ footer{
     width: 50%;
 }
 
+@media (max-width: 1250px) {
+    .footer-group-text{
+        flex-direction: column;
+        align-items: center;
+        height: 110px;
+    }
+}
+
+
+
 
