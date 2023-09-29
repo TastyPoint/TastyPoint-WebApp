@@ -1,0 +1,52 @@
+
+<div class="section-register">
+    <div class="container-register">
+        <h2 id="subtitle" style="color:#3F1602 ;">Register</h2>
+        <span id="paragraph" style="color:#3F1602 ; font-family: 'Roboto', sans-serif;">Login your account to access the temperature and food monitoring dashboard</span>
+
+        <form class="example-form" style="margin-top: 20px;">
+            <mat-form-field class="example-full-width">
+                <mat-label>Restaurant Name</mat-label>
+                <input matInput placeholder="Restaurant Name" >
+            </mat-form-field>
+        </form>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Phone Number</mat-label>
+                <input matInput placeholder="Phone Number">
+            </mat-form-field>
+        </form>
+        <form class="example-form" >
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" >
+            </mat-form-field>
+        </form>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password">
+            </mat-form-field>
+        </form>
+
+        <section class="example-section">
+            <mat-checkbox class="example-margin" [color]="'var(--color-secondary)'"><span style="font-family: 'Roboto', sans-serif;">Remember me?</span></mat-checkbox>
+        </section>
+
+        <div class="btn-container" style="display: flex; justify-content: center; text-align: center; margin-top: 10px;">
+            <a routerLink="" style="text-decoration: none; color: #fff;">
+                <div id="btn-main">
+                    <span>Register</span> 
+                </div>
+            </a>
+        </div>
+        
+
+        <section class="example-section" style="margin-top: 20px;">
+            <span style="font-family: 'Roboto', sans-serif; ">Already a user? <a routerLink="/login" style="color:var(--color-secondary)">Login</a></span>
+        </section>
+
+    </div>
+</div>
+
+<div id="line-white"></div>
