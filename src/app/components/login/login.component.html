@@ -4,39 +4,46 @@
         <h2 id="subtitle" style="color:#3F1602 ;">Login</h2>
         <span id="paragraph" style="color:#3F1602 ; font-family: 'Roboto', sans-serif;">Login your account to access the temperature and food monitoring dashboard</span>
 
-        
-        <form class="example-form" style="margin-top: 20px;">
+        <form [formGroup]="formLogin" class="example-form" style="margin-top: 20px;">
             <mat-form-field class="example-full-width">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" >
+                <input matInput placeholder="Email" formControlName="email">
             </mat-form-field>
-        </form>
-        <form class="example-form">
+        
+        
             <mat-form-field class="example-full-width">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password">
+                <input matInput placeholder="Password" formControlName="password">
             </mat-form-field>
-        </form>
-        
 
-        <section class="example-section">
-            <mat-checkbox class="example-margin" ><span style="font-family: 'Roboto', sans-serif;">Remember me?</span></mat-checkbox>
-        </section>
+            <section class="example-section">
+                <mat-checkbox class="example-margin" ><span style="font-family: 'Roboto', sans-serif;">Remember me?</span></mat-checkbox>
+            </section>
+    
+            <div style="display: flex; justify-content: center; text-align: center; ">
+                <div class="container-btns" style="gap:10px">
+                    <a routerLink="" style="text-decoration: none;" (click)="onSubmit()">
+                        <div id="btn-second" >
+                            <span>Login</span>
+                        </div>
+                    </a>
+                    <a routerLink="/register" style="text-decoration: none;">
+                        <div id="btn-main" >
+                            <span>Register</span> 
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-        <div style="display: flex; justify-content: center; text-align: center;">
-            <div class="container-btns">
-                <a routerLink="" style="text-decoration: none;">
-                    <div id="btn-second">
-                        <span>Login</span>
-                    </div>
-                </a>
-                <a routerLink="/register" style="text-decoration: none;">
-                    <div id="btn-main">
-                        <span>Register</span> 
-                    </div>
+            <div class="container-google" style="margin-top: 20px;" (click)="loginGoogle()">
+                <a  class="google-login-btn" style="color: var(--color-secondary) ;cursor: pointer;">
+                    <span>Login with Google </span>
+                    <img src="../../../assets/google_icon.png" alt="" style="height: 15px;">
                 </a>
             </div>
-        </div>
+           
+
+        </form>    
         
 
     </div>

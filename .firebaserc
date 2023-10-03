@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tastypoint-firebase": {
+      "hosting": {
+        "TastyPoint-WebApp": [
+          "tastypoint-firebase"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tastypoint-firebase"
+  }
+}
