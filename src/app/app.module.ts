@@ -8,10 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Add material module
 import { MaterialModule } from 'shared/material.module';
+
+//Components
 import { LoginComponent } from './components/login/login.component';
 import { NavbarLoginComponent } from './components/navbar-login/navbar-login.component';
 import { FooterLoginComponent } from './components/footer-login/footer-login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+
+//Firebase
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -19,13 +27,16 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     NavbarLoginComponent,
     FooterLoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [],
   bootstrap: [AppComponent]
