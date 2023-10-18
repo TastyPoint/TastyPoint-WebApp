@@ -15,6 +15,8 @@ import { NavbarLoginComponent } from './components/navbar-login/navbar-login.com
 import { FooterLoginComponent } from './components/footer-login/footer-login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { RegisterInventoryComponent } from './components/register-inventory/register-inventory.component';
+import { UpdateInventoryComponent } from './components/update-inventory/update-inventory.component';
 
 //Firebase
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -28,7 +30,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     NavbarLoginComponent,
     FooterLoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterInventoryComponent,
+    UpdateInventoryComponent
   ],
   imports: [
     BrowserModule,
