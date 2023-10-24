@@ -1,0 +1,40 @@
+<div class="section-inventory">
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort class="custom-table">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Product Id</mat-header-cell>
+      <mat-cell *matCellDef="let promotion">{{ promotion.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Product Name</mat-header-cell>
+      <mat-cell *matCellDef="let promotion">{{ promotion.title }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="entryDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Entry Date</mat-header-cell>
+      <mat-cell *matCellDef="let promotion">{{ promotion.entryDate }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expirationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Expiration Date</mat-header-cell>
+      <mat-cell *matCellDef="let promotion">{{ promotion.expirationDate }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef class="custom-header">Action</mat-header-cell>
+      <mat-cell *matCellDef="let promotion">
+        <button (click)="deleteRow(promotion.id)">Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" class="custom-row"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="50"
+  [pageSize]="8"
+  [pageIndex]="0"
+  [showFirstLastButtons]="false" 
+  class="custom-paginator"></mat-paginator>
+</div>
+</div>
