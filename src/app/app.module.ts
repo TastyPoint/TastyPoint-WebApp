@@ -22,6 +22,8 @@ import { UpdateInventoryComponent } from './components/update-inventory/update-i
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import {MatListModule} from "@angular/material/list";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    MatListModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
