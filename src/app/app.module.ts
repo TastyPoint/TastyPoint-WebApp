@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,9 +18,15 @@ import { RegisterInventoryComponent } from './components/register-inventory/regi
 import { UpdateInventoryComponent } from './components/update-inventory/update-inventory.component';
 
 //Firebase
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { InventoryAnatyticsComponent } from './components/inventory-anatytics/inventory-anatytics.component';
+
+//Graphics
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import more from 'highcharts/highcharts-more.src';
+import exporting from 'highcharts/modules/exporting.src';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     RegisterComponent,
     HomeComponent,
     RegisterInventoryComponent,
-    UpdateInventoryComponent
+    UpdateInventoryComponent,
+    InventoryAnatyticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +47,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    ChartModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [more, exporting] }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
