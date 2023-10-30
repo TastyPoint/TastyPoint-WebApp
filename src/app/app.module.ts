@@ -30,6 +30,7 @@ import { InventoryAnatyticsComponent } from './components/inventory-anatytics/in
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import more from 'highcharts/highcharts-more.src';
 import exporting from 'highcharts/modules/exporting.src';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import exporting from 'highcharts/modules/exporting.src';
     FooterLoginComponent,
     RegisterComponent,
     InventoryTableComponent,
-    HomeComponent
+    HomeComponent,
     RegisterInventoryComponent,
     UpdateInventoryComponent,
     InventoryAnatyticsComponent,
@@ -53,6 +54,7 @@ import exporting from 'highcharts/modules/exporting.src';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     ChartModule,
+    MatTooltipModule,
   ],
   providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [more, exporting] }],
   bootstrap: [AppComponent],

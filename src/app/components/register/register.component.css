@@ -1,33 +1,94 @@
 
+.subscription-plan, .section-register, .conditions {
+  display: flex;
+  justify-content: center;
+}
 
-.section-register{
-    height: 758px;
-    background-color: var(--color-primary);
-    display: flex;
-    justify-content: center;
-    text-align: center;
+.section-register {
+  height: 758px;
+  background-color: var(--color-primary);
+  text-align: center;
 }
 
 .container-register{
-    width: 40%;
-    height: 80%;
-    margin-top: 60px;
+  width: 40%;
+  height: 80%;
+  margin-top: 60px;
 }
 
 .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .container-login form {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  
-.example-full-width {
-    width: 90%;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
+.example-full-width {
+  width: 90%;
+}
 
+.icon-container {
+  width: 100%;
+  display: flex;
+  align-items: start;
+}
+
+.icon-display {
+  transform: scale(1.5);
+}
+
+.conditions, .subscription-plan {
+  align-items: center;
+}
+
+.conditions {
+  gap: 0.5rem;
+}
+
+.subscription-plan {
+  color: var(--color-secondary);
+  flex-direction: column;
+}
+
+  .subscription-plan ul {
+    text-align: start;
+    font-weight: 500;
+  }
+
+  .subscription-plan .price {
+    font-size: 3rem;
+    font-weight: bold;
+    padding-top: 1rem;
+  }
+
+  .subscription-plan mat-card {
+    min-width: 150px;
+    max-width: 400px;
+    width: 100%;
+  }
+
+mat-card {
+  border-radius: 2rem;
+  padding-bottom: 1rem;
+}
+
+.red-tooltip {
+  background-color:red;
+  font-size: 11px;
+  color: red;
+}
+
+#btn-main:hover {
+  cursor: pointer;
+}
+
+#btn-main:disabled {
+  background-color: #b4b2b2;
+  color: black;
+  cursor: context-menu;
+}
