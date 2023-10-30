@@ -66,3 +66,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     letter-spacing: 0em;
     text-align: center;
 }
+
+.container {
+    min-height: 100%;
+    padding: 15px 30px;    
+}

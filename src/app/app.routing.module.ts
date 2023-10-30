@@ -8,13 +8,19 @@ import { InventoryTableComponent } from './components/inventory-table/inventory-
 
 
 import { canActivate, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+import { RegisterInventoryComponent } from './components/register-inventory/register-inventory.component';
+import { UpdateInventoryComponent } from './components/update-inventory/update-inventory.component';
+import { InventoryAnatyticsComponent } from './components/inventory-anatytics/inventory-anatytics.component';
 
 const routes: Routes = [
-    {path: '', pathMatch: 'full', redirectTo: 'login'},
-    {path: 'home', component: HomeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
+    {path: '', pathMatch: 'full', redirectTo: 'login'}, 
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent}, 
     {path: 'inventory-table', component: InventoryTableComponent},
+    {path: 'home', component: HomeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
+    {path: 'register-inventory', component: RegisterInventoryComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
+    {path: 'update-inventory', component: UpdateInventoryComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
+    {path: 'inventory-analytics', component: InventoryAnatyticsComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
 ];
 
 @NgModule({

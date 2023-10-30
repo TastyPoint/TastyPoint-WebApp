@@ -1,0 +1,44 @@
+<div class="section-update-inventory" >
+    <div class="container-update-product" >
+        <h2 id="subtitle" >Update Product</h2>
+        <span id="paragraph" style="font-family: 'Roboto', sans-serif;">Update the selected product</span>
+
+        <form [formGroup]="formUpdateProduct" class="example-form" style="margin-top: 30px; ">
+            <h2 id="subtitle-form" style=" color:var(--color-secondary) ; font-size: 17px; font-weight: bold;">Product Name</h2>
+            <mat-form-field class="example-full-width">
+                <mat-label>Product Name</mat-label>
+                <input matInput placeholder="Product Name" formControlName="productName">
+            </mat-form-field>
+
+            <h2 id="subtitle-form" style=" color:var(--color-secondary) ; font-size: 17px; font-weight: bold;">Entry Date</h2>
+            <mat-form-field class="example-full-width">
+                <mat-label>Entry Date</mat-label>
+                <input matInput placeholder="Entry Date" formControlName="entryDate">
+            </mat-form-field>
+
+            <h2 id="subtitle-form" style=" color: var(--color-secondary); font-size: 17px; font-weight: bold;">Expiration Date</h2>
+            <mat-form-field class="example-full-width">
+                <mat-label>Expiration Date</mat-label>
+                <input matInput placeholder="Expiration Date" formControlName="expirationDate">
+            </mat-form-field>
+        
+            <div style="display: flex; justify-content: center; text-align: center; ">
+                <div class="container-btns" style="gap:10px">
+                    <a routerLink="" style="text-decoration: none;" (click)="onSubmit()">
+                        <div id="btn-second" >
+                            <span>Cancel</span>
+                        </div>
+                    </a>
+                    <a routerLink="" style="text-decoration: none;">
+                        <div id="btn-main" >
+                            <span>Update</span> 
+                        </div>
+                    </a>
+                </div>
+            </div>
+           
+        </form>    
+
+    </div>
+
+</div>
