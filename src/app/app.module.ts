@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
@@ -13,9 +14,11 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarLoginComponent } from './components/navbar-login/navbar-login.component';
 import { FooterLoginComponent } from './components/footer-login/footer-login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { InventoryTableComponent } from './components/inventory-table/inventory-table.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterInventoryComponent } from './components/register-inventory/register-inventory.component';
 import { UpdateInventoryComponent } from './components/update-inventory/update-inventory.component';
+
 
 //Firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -35,7 +38,8 @@ import exporting from 'highcharts/modules/exporting.src';
     NavbarLoginComponent,
     FooterLoginComponent,
     RegisterComponent,
-    HomeComponent,
+    InventoryTableComponent,
+    HomeComponent
     RegisterInventoryComponent,
     UpdateInventoryComponent,
     InventoryAnatyticsComponent,
@@ -45,6 +49,7 @@ import exporting from 'highcharts/modules/exporting.src';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     ChartModule,

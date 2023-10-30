@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { InventoryTableComponent } from './components/inventory-table/inventory-table.component';
+
 
 import { canActivate, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import { RegisterInventoryComponent } from './components/register-inventory/register-inventory.component';
@@ -13,7 +15,8 @@ import { InventoryAnatyticsComponent } from './components/inventory-anatytics/in
 const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'login'}, 
     {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
+    {path: 'register', component: RegisterComponent}, 
+    {path: 'inventory-table', component: InventoryTableComponent},
     {path: 'home', component: HomeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
     {path: 'register-inventory', component: RegisterInventoryComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
     {path: 'update-inventory', component: UpdateInventoryComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },

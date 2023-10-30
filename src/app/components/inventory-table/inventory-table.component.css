@@ -1,0 +1,61 @@
+/* Estilos para el contenedor de la tabla */
+
+.section-inventory{
+  height: 758px;
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.table-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;  /* Agrega un contorno a la tabla */
+  padding: 10px; /* Espacio alrededor de la tabla */
+  position: relative; /* Añade posición relativa para el contenedor */
+}
+
+/* Estilos para la tabla */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FDFBEF; /* Cambia el color de fondo de la tabla */
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #FDFBEF;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Estilos para las filas impares */
+.custom-row:nth-child(odd) {
+  background-color: #FDFBEF;
+}
+
+/* Estilos para el botón "Delete" */
+.custom-table button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-table button:hover {
+  background-color: #d32f2f;
+}
+
+/* Estilos para el encabezado de la tabla */
+.custom-header {
+  background-color: #3F1602 !important;
+  color: #FDFBEF !important;
+}
+
+ /* Estilos para el paginador */
+.custom-paginator {
+  background-color: #FDFBEF; /* Cambia el color de fondo del paginador */
+  text-align: center; /* Centra la paginación en la parte inferior de la tabla */
+}
