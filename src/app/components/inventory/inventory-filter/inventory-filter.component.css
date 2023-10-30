@@ -1,0 +1,29 @@
+.filter-form {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  gap: 1rem;
+}
+
+button {
+  border-radius: 0.6rem;
+  min-width: 4rem;
+  max-width: 6rem;
+  width: 100%;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-container {
+  max-width: 30rem;
+  text-align: left;
+  padding-bottom: 1rem;
+}
+
+.filter-field {
+  width: 100%;
+}
+
+

@@ -1,5 +1,7 @@
 <div class="section-inventory">
 <div class="table-container">
+  <app-inventory-filter [filterCallback]="this"></app-inventory-filter>
+
   <mat-table [dataSource]="dataSource" matSort class="custom-table">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Product Id</mat-header-cell>
@@ -34,7 +36,7 @@
   <mat-paginator [length]="50"
   [pageSize]="8"
   [pageIndex]="0"
-  [showFirstLastButtons]="false" 
+  [showFirstLastButtons]="false"
   class="custom-paginator"></mat-paginator>
 </div>
 </div>

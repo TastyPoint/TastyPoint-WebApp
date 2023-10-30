@@ -13,9 +13,9 @@ import { UpdateInventoryComponent } from './components/update-inventory/update-i
 import { InventoryAnatyticsComponent } from './components/inventory-anatytics/inventory-anatytics.component';
 
 const routes: Routes = [
-    {path: '', pathMatch: 'full', redirectTo: 'login'}, 
+    {path: '', pathMatch: 'full', redirectTo: 'login'},
     {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent}, 
+    {path: 'register', component: RegisterComponent},
     {path: 'inventory-table', component: InventoryTableComponent},
     {path: 'home', component: HomeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
     {path: 'register-inventory', component: RegisterInventoryComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },

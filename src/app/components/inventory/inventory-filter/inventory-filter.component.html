@@ -1,0 +1,28 @@
+<div class="filter-container">
+  <p>Manage your restaurant's food inventory</p>
+  <form (submit)="onSearch()" #filterForm="ngForm" class="filter-form">
+    <div class="filter-fields">
+      <mat-form-field *ngFor="let field of filterFields" class="filter-field">
+        <mat-label>{{ field.label }}</mat-label>
+        <input [placeholder]="field.placeholder" [name]="field.field"
+               matInput [type]="field.type" [(ngModel)]="field.value"
+               autocomplete="off"
+               (keyup)="onKeyUp(field)"
+               [required]="field.required" />
+        <mat-error *ngIf="hasError(field.field, 'required')"><small>{{field.label}} is <strong>required</strong></small></mat-error>
+      </mat-form-field>
+    </div>
+    <div class="filter-actions">
+      <!---
+      <button mat-flat-button color="accent">
+        Search
+      </button>
+      <button mat-flat-button color="accent"
+              type="reset" (click)="onReset()">
+        Reset
+      </button>
+      -->
+    </div>
+  </form>
+
+</div>

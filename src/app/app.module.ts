@@ -31,6 +31,7 @@ import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import more from 'highcharts/highcharts-more.src';
 import exporting from 'highcharts/modules/exporting.src';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {InventoryFilterComponent} from "./components/inventory/inventory-filter/inventory-filter.component";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     RegisterInventoryComponent,
     UpdateInventoryComponent,
     InventoryAnatyticsComponent,
+    InventoryFilterComponent
   ],
   imports: [
     BrowserModule,
