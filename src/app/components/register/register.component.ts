@@ -101,14 +101,14 @@ export class RegisterComponent {
       this.credentials.password = this.controlValue("password")
       this.showSubscription = !this.showSubscription;
 
-      
+      //asignando el uid y el email actual con el esta conectado a la app
+      this.data.uid = this.userService.getCurrentUser()?.uid;
+      this.data.email = this.userService.getCurrentUser()?.email; 
+      this.data.restaurantName = this.controlValue("name");
+      this.data.phoneNumber = this.controlValue("number");
+
       this.userDataService.createUser(this.data).subscribe((response) => {
-        //console.log('Usuario creado:', response);
-        //asignando el uid y el email actual con el esta conectado a la app
-        this.data.uid = this.userService.getCurrentUser()?.uid;
-        this.data.email = this.userService.getCurrentUser()?.email; 
-        this.data.restaurantName = this.controlValue("name");
-        this.data.phoneNumber = this.controlValue("number");
+        console.log('Usuario creado:', response);
       }, (error) => {
         console.log('Error al crear usuario:', error);
       });
