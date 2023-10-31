@@ -24,7 +24,7 @@ export class RegisterComponent {
 
   @ViewChild('registerForm', {static: false})
   registerForm!: NgForm;
-  successfulRoute: string = '/login'
+  successfulRoute: string = '/home'
   registerFields: FormField[] = [
     {
       label: "Restaurant name",

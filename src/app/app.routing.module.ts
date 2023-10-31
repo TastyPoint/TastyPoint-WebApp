@@ -16,7 +16,7 @@ const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'login'},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'inventory-table', component: InventoryTableComponent},
+    {path: 'inventory-table', component: InventoryTableComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
     {path: 'home', component: HomeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
     {path: 'register-inventory', component: RegisterInventoryComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
     {path: 'update-inventory', component: UpdateInventoryComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login'])) },
