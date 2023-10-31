@@ -7,13 +7,25 @@
         <form [formGroup]="formLogin" class="example-form" style="margin-top: 20px;">
             <mat-form-field class="example-full-width">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" formControlName="email">
+                <input matInput placeholder="Email" type="email" formControlName="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                <mat-error *ngIf="formLogin.get('email')!.hasError('pattern')">
+                    Email is <strong>invalid</strong>
+                </mat-error>
             </mat-form-field>
         
         
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" style="margin-top: 10px;">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" formControlName="password">
+                <input matInput type="password" placeholder="Password" formControlName="password" 
+                minlength="8" required 
+                pattern="^[a-zA-Z\d]{8}$">
+                <mat-error *ngIf="formLogin.get('password')!.hasError('required')">
+                Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="formLogin.get('password')!.hasError('pattern')">
+                Password must be at least <strong>8 characters long</strong>
+                </mat-error>
+                
             </mat-form-field>
 
             <section class="example-section">

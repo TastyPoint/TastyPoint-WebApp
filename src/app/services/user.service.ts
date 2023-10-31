@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword , signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider} from '@angular/fire/auth';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,21 @@ export class UserService {
   }
 
 
+  getUserEmail(){
+    return this.auth.currentUser?.email;
+  }
+
+  getUserUid(){
+    return this.auth.currentUser?.uid;
+  }
+
+  getCurrentUser(): User | null {
+    const currentUser = this.auth.currentUser;
+    if (currentUser) {
+      const { uid, email } = currentUser;
+      return { uid, email, restaurantName: null, phoneNumber: null};
+    }
+    return null;
+  }
 
 }

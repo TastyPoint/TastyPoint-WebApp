@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import {Subscription} from "../../models/subscription";
 import {FormField} from "../../models/form-field";
+import { UserDataService } from 'src/app/services/user-data.service';
+import { User } from 'src/app/models/user.model';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +14,13 @@ import {FormField} from "../../models/form-field";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
+  data: User = {
+    uid: null,
+    email: null,
+    restaurantName: null,
+    phoneNumber: null,
+  }
 
   @ViewChild('registerForm', {static: false})
   registerForm!: NgForm;
@@ -73,12 +83,13 @@ export class RegisterComponent {
     password: ''
   }
 
-  constructor(private userService: UserService, private router: Router){
+  constructor(private userService: UserService, private router: Router, private userDataService: UserDataService){
 
   }
 
   ngOnInit(): void {
-
+    this.data.email = this.userService.getUserEmail();
+    this.data.uid = this.userService.getUserUid();
   }
 
   validateFields() {
@@ -89,6 +100,18 @@ export class RegisterComponent {
       this.credentials.email = this.controlValue("email")
       this.credentials.password = this.controlValue("password")
       this.showSubscription = !this.showSubscription;
+
+      
+      this.userDataService.createUser(this.data).subscribe((response) => {
+        //console.log('Usuario creado:', response);
+        //asignando el uid y el email actual con el esta conectado a la app
+        this.data.uid = this.userService.getCurrentUser()?.uid;
+        this.data.email = this.userService.getCurrentUser()?.email; 
+        this.data.restaurantName = this.controlValue("name");
+        this.data.phoneNumber = this.controlValue("number");
+      }, (error) => {
+        console.log('Error al crear usuario:', error);
+      });
     }
     console.log(this.acceptSubscription)
   }
