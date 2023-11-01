@@ -87,6 +87,8 @@ export class RegisterComponent {
 
   }
 
+ 
+
   ngOnInit(): void {
     this.data.email = this.userService.getUserEmail();
     this.data.uid = this.userService.getUserUid();
@@ -95,34 +97,38 @@ export class RegisterComponent {
   validateFields() {
   }
 
-  onSubmit(){
+onSubmit(){
     if(this.registerForm.valid) {
       this.credentials.email = this.controlValue("email")
       this.credentials.password = this.controlValue("password")
       this.showSubscription = !this.showSubscription;
 
-      //asignando el uid y el email actual con el esta conectado a la app
-      this.data.uid = this.userService.getCurrentUser()?.uid;
-      this.data.email = this.userService.getCurrentUser()?.email; 
+      //asignando los datos de restaurantName y phonenumber del formulario
       this.data.restaurantName = this.controlValue("name");
-      this.data.phoneNumber = this.controlValue("number");
-
-      this.userDataService.createUser(this.data).subscribe((response) => {
-        console.log('Usuario creado:', response);
-      }, (error) => {
-        console.log('Error al crear usuario:', error);
-      });
+      this.data.phoneNumber = this.controlValue("number"); 
     }
     console.log(this.acceptSubscription)
   }
 
-  controlValue(controlName: string): string { return this.registerForm.controls[controlName].value; }
+  controlValue(controlName: string): string { 
+    return this.registerForm.controls[controlName].value;
+  }
 
   register() {
     if(this.showSubscription && this.acceptSubscription) {
       this.userService.register(this.credentials)
         .then(response => {
           console.log(response);
+          
+          //asignando el uid y el email actual con el esta conectado a la app
+          this.data.uid = this.userService.getCurrentUser()?.uid;
+          this.data.email = this.userService.getCurrentUser()?.email; 
+
+          //Create User
+          this.userDataService.create(this.data).then(() => {
+            console.log('Created new user successfully!');
+          })
+
           this.router.navigateByUrl(this.successfulRoute).then();
         })
         .catch(error => console.log(error));

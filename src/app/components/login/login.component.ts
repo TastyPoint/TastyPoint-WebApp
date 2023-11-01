@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserDataService } from 'src/app/services/user-data.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent {
   formLogin: FormGroup;
 
-  constructor(private userService: UserService, private router: Router){
+  constructor(private userService: UserService, private router: Router, private userDataService: UserDataService){
+    
     this.formLogin = new FormGroup({
       email: new FormControl(),
       password: new FormControl(),

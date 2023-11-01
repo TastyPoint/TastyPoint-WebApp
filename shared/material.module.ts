@@ -19,6 +19,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
+
+
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -38,7 +40,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatCheckboxModule
+        MatCheckboxModule,
     ],
     exports: [
         BrowserAnimationsModule,
@@ -58,7 +60,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatCheckboxModule
+        MatCheckboxModule,
     ]
     
   })

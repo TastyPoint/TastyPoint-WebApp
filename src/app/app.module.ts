@@ -25,6 +25,9 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { InventoryAnatyticsComponent } from './components/inventory-anatytics/inventory-anatytics.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 //Graphics
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
@@ -45,7 +48,8 @@ import {InventoryFilterComponent} from "./components/inventory/inventory-filter/
     RegisterInventoryComponent,
     UpdateInventoryComponent,
     InventoryAnatyticsComponent,
-    InventoryFilterComponent
+    InventoryFilterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,9 @@ import {InventoryFilterComponent} from "./components/inventory/inventory-filter/
     provideAuth(() => getAuth()),
     ChartModule,
     MatTooltipModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ],
   providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [more, exporting] }],
   bootstrap: [AppComponent],
