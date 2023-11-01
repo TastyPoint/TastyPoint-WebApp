@@ -1,42 +1,64 @@
 <div class="section-inventory">
-<div class="table-container">
-  <app-inventory-filter [filterCallback]="this"></app-inventory-filter>
+  <div class="table-container">
 
-  <mat-table [dataSource]="dataSource" matSort class="custom-table">
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Product Id</mat-header-cell>
-      <mat-cell *matCellDef="let promotion">{{ promotion.id }}</mat-cell>
-    </ng-container>
+    <div class="inventory-actions" *ngIf="!isEdit && !isRegister">
+      <app-inventory-filter [filterCallback]="this"></app-inventory-filter>
+      <button mat-flat-button color="accent" (click)="isRegister = !isRegister">
+        Create
+      </button>
+    </div>
 
-    <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Product Name</mat-header-cell>
-      <mat-cell *matCellDef="let promotion">{{ promotion.title }}</mat-cell>
-    </ng-container>
 
-    <ng-container matColumnDef="entryDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Entry Date</mat-header-cell>
-      <mat-cell *matCellDef="let promotion">{{ promotion.entryDate }}</mat-cell>
-    </ng-container>
+    <div *ngIf="isEdit || isRegister" class="icon-container">
+      <button mat-icon-button (click)="back()">
+        <mat-icon class="icon-display">keyboard_backspace</mat-icon>
+      </button>
+    </div>
 
-    <ng-container matColumnDef="expirationDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Expiration Date</mat-header-cell>
-      <mat-cell *matCellDef="let promotion">{{ promotion.expirationDate }}</mat-cell>
-    </ng-container>
 
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef class="custom-header">Action</mat-header-cell>
-      <mat-cell *matCellDef="let promotion">
-        <button (click)="deleteRow(promotion.id)">Delete</button>
-      </mat-cell>
-    </ng-container>
+    <app-register-inventory [onCreate]="this" *ngIf="isRegister"></app-register-inventory>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns" class="custom-row"></mat-row>
-  </mat-table>
-  <mat-paginator [length]="50"
-  [pageSize]="8"
-  [pageIndex]="0"
-  [showFirstLastButtons]="false"
-  class="custom-paginator"></mat-paginator>
-</div>
+    <app-update-inventory [onUpdate]="this" [product]="editProduct" *ngIf="isEdit; else inventory"></app-update-inventory>
+    <ng-template #inventory>
+      <mat-table *ngIf="!isRegister" [dataSource]="dataSource" matSort class="custom-table">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Product Id</mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.uid }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Product Name</mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.item.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="entryDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Entry Date</mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.item.entryDate }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="expirationDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="custom-header">Expiration Date</mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.item.expirationDate }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef class="custom-header">Actions</mat-header-cell>
+          <mat-cell *matCellDef="let product" class="actions">
+            <button (click)="deleteRow(product.uid)">Delete</button>
+            <button (click)="updateProduct(product)">Update</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" class="custom-row"></mat-row>
+      </mat-table>
+      <mat-paginator *ngIf="!isRegister" [length]="50"
+                     [pageSize]="8"
+                     [pageIndex]="0"
+                     [showFirstLastButtons]="false"
+                     class="custom-paginator"></mat-paginator>
+    </ng-template>
+
+
+  </div>
 </div>

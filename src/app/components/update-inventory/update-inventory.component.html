@@ -21,23 +21,17 @@
                 <mat-label>Expiration Date</mat-label>
                 <input matInput placeholder="Expiration Date" formControlName="expirationDate">
             </mat-form-field>
-        
+
             <div style="display: flex; justify-content: center; text-align: center; ">
                 <div class="container-btns" style="gap:10px">
-                    <a routerLink="" style="text-decoration: none;" (click)="onSubmit()">
-                        <div id="btn-second" >
-                            <span>Cancel</span>
-                        </div>
-                    </a>
-                    <a routerLink="" style="text-decoration: none;">
-                        <div id="btn-main" >
-                            <span>Update</span> 
-                        </div>
-                    </a>
+                    <div id="btn-second" (click)="cancel()">Cancel</div>
+                    <div id="btn-main" (click)="onSubmit()">
+                        <span>Update</span>
+                    </div>
                 </div>
             </div>
-           
-        </form>    
+
+        </form>
 
     </div>
 

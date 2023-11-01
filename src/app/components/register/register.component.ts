@@ -87,7 +87,7 @@ export class RegisterComponent {
 
   }
 
- 
+
 
   ngOnInit(): void {
     this.data.email = this.userService.getUserEmail();
@@ -105,12 +105,12 @@ onSubmit(){
 
       //asignando los datos de restaurantName y phonenumber del formulario
       this.data.restaurantName = this.controlValue("name");
-      this.data.phoneNumber = this.controlValue("number"); 
+      this.data.phoneNumber = this.controlValue("number");
     }
     console.log(this.acceptSubscription)
   }
 
-  controlValue(controlName: string): string { 
+  controlValue(controlName: string): string {
     return this.registerForm.controls[controlName].value;
   }
 
@@ -119,15 +119,14 @@ onSubmit(){
       this.userService.register(this.credentials)
         .then(response => {
           console.log(response);
-          
+
           //asignando el uid y el email actual con el esta conectado a la app
           this.data.uid = this.userService.getCurrentUser()?.uid;
-          this.data.email = this.userService.getCurrentUser()?.email; 
+          this.data.email = this.userService.getCurrentUser()?.email;
 
           //Create User
-          this.userDataService.create(this.data).then(() => {
-            console.log('Created new user successfully!');
-          })
+          this.userDataService.create(this.data);
+          console.log('Created new user successfully!');
 
           this.router.navigateByUrl(this.successfulRoute).then();
         })

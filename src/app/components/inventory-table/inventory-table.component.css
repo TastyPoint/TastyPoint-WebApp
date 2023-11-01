@@ -59,3 +59,8 @@
   background-color: #FDFBEF; /* Cambia el color de fondo del paginador */
   text-align: center; /* Centra la paginación en la parte inferior de la tabla */
 }
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}

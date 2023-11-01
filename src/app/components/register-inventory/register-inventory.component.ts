@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import {ProductsService} from "../../services/products.service";
+import {Product, ProductCollection} from "../../models/product.model";
+
+export interface CreateItemCallback {
+  afterCreate(product: ProductCollection): void
+}
 
 @Component({
   selector: 'app-register-inventory',
@@ -10,7 +16,10 @@ export class RegisterInventoryComponent {
 
   formAddProduct: FormGroup;
 
-  constructor(){
+  @Input({required: true})
+  onCreate!:CreateItemCallback
+
+  constructor(private productService: ProductsService){
     this.formAddProduct = new FormGroup({
       productName: new FormControl(),
       entryDate: new FormControl(),
@@ -23,7 +32,13 @@ export class RegisterInventoryComponent {
   }
 
   onSubmit(){
-    
+    const product : Product = {
+      name: this.formAddProduct.controls["productName"]?.value,
+      entryDate: this.formAddProduct.controls["entryDate"]?.value,
+      expirationDate: this.formAddProduct.controls["expirationDate"]?.value
+    }
+
+    this.onCreate.afterCreate(this.productService.create(product))
   }
 
 }
