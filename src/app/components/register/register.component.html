@@ -20,8 +20,12 @@
                autocomplete="off"
                [minlength]="field?.minLength == undefined ? null : field.minLength!"
                [required]="field.required" />
-        <mat-error *ngIf="hasError(field.field, 'required')">{{field.label}} is <strong>required</strong></mat-error>
-        <mat-error *ngIf="hasError(field.field, 'minlength')">{{field.label}} min length is <strong>{{field?.minLength}}</strong></mat-error>
+
+        <mat-error *ngIf="hasError(field.field, 'required')"><small>{{field.label}} is <strong>required</strong></small></mat-error>
+        <mat-error *ngIf="hasError(field.field, 'minlength')"><small>{{field.label}} min length is <strong>{{field?.minLength}}</strong></small></mat-error>
+        <mat-error *ngIf="hasError(field.field, 'email')"><small>Must be a <strong>valid</strong> email</small></mat-error>
+        <mat-error *ngIf="field.field == 'number' && hasError(field.field, 'pattern')"><small>Must be a <strong>valid</strong> phone number</small></mat-error>
+        <mat-error *ngIf="field.field == 'name' && hasError(field.field, 'pattern')"><small>Must contain only letters, numbers, spacing and underscores.</small></mat-error>
       </mat-form-field>
 
 
@@ -57,9 +61,10 @@
       </div>
 
       <div class="btn-container" style="display: flex; justify-content: center; text-align: center; margin-top: 10px;">
-        <button id="btn-main" (click)="register()" [disabled]="!acceptSubscription">
+        <button *ngIf="!isRegistering" id="btn-main" (click)="register()" [disabled]="!acceptSubscription">
           <span>Register</span>
         </button>
+        <mat-spinner *ngIf="isRegistering" color="accent" class="registering"></mat-spinner>
       </div>
     </div>
 

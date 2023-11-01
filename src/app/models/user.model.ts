@@ -1,6 +1,5 @@
 export interface User {
-    uid: any,
-    email: any,
-    restaurantName: any,
-    phoneNumber: any,
+    email: string,
+    restaurantName: string,
+    phoneNumber: string,
 }

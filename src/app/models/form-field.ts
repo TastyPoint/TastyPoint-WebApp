@@ -1,6 +1,6 @@
 
 
-import {NgForm} from "@angular/forms";
+import {NgForm, ValidatorFn} from "@angular/forms";
 import {CustomAsyncValidator} from "./custom-async-validator";
 import {CustomValidator} from "./custom-validator";
 
@@ -19,12 +19,13 @@ export interface FormField {
   * For normal Validation, is asignable to [appCustomValidator] directive
   * */
   customValidator?: CustomValidator
-
+  validators?:  ValidatorFn | ValidatorFn[],
   crossWith?: FormField
   maxLength?: string | number;
   pattern?: string;
   minLength?: string | number;
-  hide?: boolean
+  hide?: boolean,
+
 }
 
 export function crossFieldWith(fields: FormField[], _this: number, _and: number) {

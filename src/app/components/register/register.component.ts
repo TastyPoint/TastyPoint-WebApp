@@ -1,30 +1,30 @@
-import {Component, ViewChild} from '@angular/core';
-import {FormGroup, FormControl, Validators, NgForm} from '@angular/forms';
+import {AfterViewChecked, AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AbstractControl, NgForm, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import {Subscription} from "../../models/subscription";
 import {FormField} from "../../models/form-field";
 import { UserDataService } from 'src/app/services/user-data.service';
 import { User } from 'src/app/models/user.model';
-import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements AfterViewInit {
 
   data: User = {
-    uid: null,
-    email: null,
-    restaurantName: null,
-    phoneNumber: null,
+    email: "",
+    restaurantName: "",
+    phoneNumber: "",
   }
 
   @ViewChild('registerForm', {static: false})
   registerForm!: NgForm;
-  successfulRoute: string = '/home'
+  successfulRoute: string = '/login'
+  isRegistering: boolean = false;
+
   registerFields: FormField[] = [
     {
       label: "Restaurant name",
@@ -32,7 +32,10 @@ export class RegisterComponent {
       placeholder: "Restaurant name",
       required: false,
       type: "text",
-      value: ""
+      value: "",
+      validators: [
+        Validators.pattern(/[A-z0-9 _]+/)
+      ]
     },
     {
       label: "Phone Number",
@@ -40,7 +43,10 @@ export class RegisterComponent {
       placeholder: "Phone Number",
       required: false,
       type: "text",
-      value: ""
+      value: "",
+      validators: [
+        Validators.pattern(/9[0-9]{8}/)
+      ]
     },
     {
       label: "Email",
@@ -48,7 +54,10 @@ export class RegisterComponent {
       placeholder: "example@email.com",
       required: true,
       type: "email",
-      value: ""
+      value: "",
+      validators: [
+        Validators.email
+      ]
     },
     {
       label: "Password",
@@ -87,10 +96,13 @@ export class RegisterComponent {
 
   }
 
-  ngOnInit(): void {
-    this.data.email = this.userService.getUserEmail();
-    this.data.uid = this.userService.getUserUid();
+  ngAfterViewInit(): void {
+    for(let field of this.registerFields) {
+      if(field.validators != undefined)
+        this.registerForm.controls[field.field]?.addValidators(field.validators)
+    }
   }
+
 
   validateFields() {
   }
@@ -101,31 +113,27 @@ export class RegisterComponent {
       this.credentials.password = this.controlValue("password")
       this.showSubscription = !this.showSubscription;
 
-      //asignando el uid y el email actual con el esta conectado a la app
-      this.data.uid = this.userService.getCurrentUser()?.uid;
-      this.data.email = this.userService.getCurrentUser()?.email; 
+      this.data.email = this.controlValue("email");
       this.data.restaurantName = this.controlValue("name");
       this.data.phoneNumber = this.controlValue("number");
-
-      this.userDataService.createUser(this.data).subscribe((response) => {
-        console.log('Usuario creado:', response);
-      }, (error) => {
-        console.log('Error al crear usuario:', error);
-      });
     }
-    console.log(this.acceptSubscription)
   }
 
   controlValue(controlName: string): string { return this.registerForm.controls[controlName].value; }
 
   register() {
     if(this.showSubscription && this.acceptSubscription) {
+      this.isRegistering = true;
       this.userService.register(this.credentials)
         .then(response => {
-          console.log(response);
+          this.userDataService.createUser(response.user.uid, this.data);
+          this.isRegistering = false;
           this.router.navigateByUrl(this.successfulRoute).then();
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error)
+          this.isRegistering = false;
+        });
     }
   }
 

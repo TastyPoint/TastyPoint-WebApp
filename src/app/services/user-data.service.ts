@@ -1,26 +1,32 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import {Database} from "@angular/fire/database";
+import {FirebaseService} from "./firebase/firebase.service";
+import {UserCollection} from "../models/user-collection.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserDataService {
+export class UserDataService extends FirebaseService {
 
-  private baseUrl = 'https://tastypoint-firebase-default-rtdb.firebaseio.com/users';
-  
-  constructor(private httpClient: HttpClient) { }
+  path: string = "users";
 
-  getUserById(userUid: string){
-    return this.httpClient.get(`${this.baseUrl}/${userUid}`);
+  constructor(database: Database) {
+    super(database);
   }
 
-  createUser(user: User){
-    return this.httpClient.post(`${this.baseUrl}`, user);
+  getUserById(userUid: string){
+    return this.getDataOnExists(`${this.path}/${userUid}`, data => data as User)
+  }
+
+  createUser(uid: string, user: User){
+    this.setData(`${this.path}/${uid}`, user);
   }
 
   getAllUsers(){
-    return this.httpClient.get(`${this.baseUrl}`);
+    return this.getDataOnExists(this.path, (data) => {
+      return this.collectionToArray(data, (key, value) => new UserCollection(key, value as User))
+    })
   }
 
 }

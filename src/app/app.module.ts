@@ -32,6 +32,8 @@ import more from 'highcharts/highcharts-more.src';
 import exporting from 'highcharts/modules/exporting.src';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {InventoryFilterComponent} from "./components/inventory/inventory-filter/inventory-filter.component";
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import {InventoryFilterComponent} from "./components/inventory/inventory-filter/
     provideAuth(() => getAuth()),
     ChartModule,
     MatTooltipModule,
+    provideDatabase(() => getDatabase()),
+    MatProgressSpinnerModule,
   ],
   providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [more, exporting] }],
   bootstrap: [AppComponent],

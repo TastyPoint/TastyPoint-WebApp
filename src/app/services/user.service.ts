@@ -38,7 +38,7 @@ export class UserService {
     const currentUser = this.auth.currentUser;
     if (currentUser) {
       const { uid, email } = currentUser;
-      return { uid, email, restaurantName: null, phoneNumber: null};
+      return { email: email!, restaurantName: "", phoneNumber: ""};
     }
     return null;
   }

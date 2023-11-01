@@ -92,3 +92,8 @@ mat-card {
   color: black;
   cursor: context-menu;
 }
+
+.registering {
+  width: 2rem !important;
+  height: 2rem !important;
+}
