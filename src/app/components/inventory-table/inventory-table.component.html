@@ -1,13 +1,20 @@
+
+<div style="background-color: var(--color-primary); display: flex; justify-content: center;" *ngIf="!isEdit && !isRegister">
+  <div style=" width: 80%; display: flex; justify-content: end;">
+    <button mat-flat-button style="background-color: var(--color-secondary);color: white; margin-top: 50px;"  (click)="isRegister = !isRegister">
+      Create
+    </button>
+  </div>
+</div>
+
+
 <div class="section-inventory">
+  
   <div class="table-container">
 
     <div class="inventory-actions" *ngIf="!isEdit && !isRegister">
       <app-inventory-filter [filterCallback]="this"></app-inventory-filter>
-      <button mat-flat-button color="accent" (click)="isRegister = !isRegister">
-        Create
-      </button>
     </div>
-
 
     <div *ngIf="isEdit || isRegister" class="icon-container">
       <button mat-icon-button (click)="back()">
@@ -45,7 +52,7 @@
           <mat-header-cell *matHeaderCellDef class="custom-header">Actions</mat-header-cell>
           <mat-cell *matCellDef="let product" class="actions">
             <button (click)="deleteRow(product.uid)">Delete</button>
-            <button (click)="updateProduct(product)">Update</button>
+            <button (click)="updateProduct(product)" style="background-color: var(--color-primary);">Update</button>
           </mat-cell>
         </ng-container>
 

@@ -5,7 +5,6 @@
   background-color: var(--color-primary);
   display: flex;
   justify-content: center;
-  text-align: center;
 }
 .table-container {
   width: 80%;
