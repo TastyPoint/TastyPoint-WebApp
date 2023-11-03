@@ -28,6 +28,8 @@ import { InventoryAnatyticsComponent } from './components/inventory-anatytics/in
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { getDatabase } from '@angular/fire/database';
+import { provideDatabase } from '@angular/fire/database';
 
 //Graphics
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
@@ -35,6 +37,8 @@ import more from 'highcharts/highcharts-more.src';
 import exporting from 'highcharts/modules/exporting.src';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {InventoryFilterComponent} from "./components/inventory/inventory-filter/inventory-filter.component";
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -59,6 +63,7 @@ import {InventoryFilterComponent} from "./components/inventory/inventory-filter/
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
     ChartModule,
     MatTooltipModule,
     AngularFireModule.initializeApp(environment.firebase),
