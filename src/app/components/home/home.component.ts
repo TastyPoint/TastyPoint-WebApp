@@ -15,6 +15,8 @@ import {
 } from '@angular/fire/database';
 import { User } from 'src/app/models/user.model';
 import { user } from '@angular/fire/auth';
+import { ProductsService } from 'src/app/services/products.service';
+import { GlobalState } from '../inventory-table/inventory-table.component';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +30,7 @@ export class HomeComponent {
     restaurantName: null,
     phoneNumber: null
   };
+
 
   warehouse = {
     temperature: 0,
@@ -49,7 +52,7 @@ export class HomeComponent {
 
   private database: Database = inject(Database);
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private productsService: ProductsService) {}
 
   getData() {
     const userId = this.userService.getUserUid();
@@ -154,6 +157,7 @@ export class HomeComponent {
     this.getMaxTemperature();
     this.getMinTempAndHum();
     this.calculateAverage();
+
   }
 
   logout() {
@@ -164,4 +168,9 @@ export class HomeComponent {
       })
       .catch(error => console.log(error));
   }
+
+  totalProducts: number = GlobalState.totalProducts;
+  
+  
+  
 }
