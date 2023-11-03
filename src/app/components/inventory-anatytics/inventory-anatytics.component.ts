@@ -4,6 +4,7 @@ import { StockChart } from 'angular-highcharts';
 import { chartData as testData } from './data';
 import { GraphicDataCollection } from 'src/app/models/graphic-data.model';
 import { UserDataService } from 'src/app/services/user-data.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-inventory-anatytics',
@@ -19,36 +20,42 @@ export class InventoryAnatyticsComponent implements OnInit {
   temperatureData: number[][] = [];
   humidityData: number[][] = [];
 
-  private dataSimulationInterval = 5000; // Cada 5 segundos
+  dataFound: boolean = false;
 
-  constructor(private userDataService: UserDataService) {}
+  private dataSimulationInterval = 5000;
+
+  constructor(private userDataService: UserDataService, private userService: UserService) {}
 
   async ngOnInit() {
     await this.getGraphicsData();
-    this.temperatureChart = this.graphicConfigFactory(
-      this.temperatureData,
-      'Variación de Temperatura en el Inventario',
-      'Grados',
-      '°C'
-    );
 
-    this.humidityChart = this.graphicConfigFactory(
-      this.humidityData,
-      'Variación de Humedad en el Inventario',
-      'Relative Humidity',
-      'RH'
-    );
+    if (this.dataFound) {
+      this.temperatureChart = this.graphicConfigFactory(
+        this.temperatureData,
+        'Variación de Temperatura en el Inventario',
+        'Grados',
+        '°C'
+      );
 
-    this.startDataSimulation();
+      this.humidityChart = this.graphicConfigFactory(
+        this.humidityData,
+        'Variación de Humedad en el Inventario',
+        'Relative Humidity',
+        'RH'
+      );
+
+      this.startDataSimulation();
+    }
   }
 
   async getGraphicsData() {
     await this.userDataService.getAll().then(response => {
-      const uid = 'FGXNmz1kUdWbyDRVQn5B48pAige2'; //this.userService.getUserUid();
+      const uid = "FGXNmz1kUdWbyDRVQn5B48pAige2" // this.userService.getUserUid();
 
       const readings = Object.values(response.find(user => user.uid === uid)?.item.readings || {});
 
-      if (readings) {
+      if (readings.length) {
+        this.dataFound = true;
         readings.forEach(reading => {
           this.temperatureData.push([parseInt(reading.timestamp), reading.temperature]);
           this.humidityData.push([parseInt(reading.timestamp), reading.humidity]);
@@ -62,7 +69,7 @@ export class InventoryAnatyticsComponent implements OnInit {
     const peruTimeZoneOffset = -5 * 60; // UTC-5 en minutos
     const peruDate = Date.now() + peruTimeZoneOffset * 60 * 1000;
 
-    console.log("peru ", peruDate);
+    console.log('peru ', peruDate);
     // Utilizar setInterval para agregar datos ficticios cada cierto intervalo
     setInterval(() => {
       const simulatedTimestamp = Date.now() + peruTimeZoneOffset * 60 * 1000;

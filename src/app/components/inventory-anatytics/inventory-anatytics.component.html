@@ -1,4 +1,9 @@
 <div class="container">
-  <div [chart]="temperatureChart"></div>
-  <div [chart]="humidityChart"></div>
+  <ng-container *ngIf="dataFound; else dataNotFound">
+    <div [chart]="temperatureChart"></div>
+    <div [chart]="humidityChart"></div>
+  </ng-container>
+  <ng-template #dataNotFound>
+    <div>No se encontraron data de sensores...</div>
+  </ng-template>
 </div>
