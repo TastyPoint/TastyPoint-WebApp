@@ -50,7 +50,7 @@ export class InventoryAnatyticsComponent implements OnInit {
 
   async getGraphicsData() {
     await this.userDataService.getAll().then(response => {
-      const uid = "FGXNmz1kUdWbyDRVQn5B48pAige2" // this.userService.getUserUid();
+      const uid = this.userService.getUserUid();
 
       const readings = Object.values(response.find(user => user.uid === uid)?.item.readings || {});
 

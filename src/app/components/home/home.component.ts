@@ -11,7 +11,7 @@ import {
   orderByChild,
   limitToLast,
   orderByKey,
-  limitToFirst,
+  limitToFirst
 } from '@angular/fire/database';
 import { User } from 'src/app/models/user.model';
 import { user } from '@angular/fire/auth';
@@ -19,14 +19,14 @@ import { user } from '@angular/fire/auth';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
   data: User = {
     uid: null,
     email: null,
     restaurantName: null,
-    phoneNumber: null,
+    phoneNumber: null
   };
 
   warehouse = {
@@ -38,21 +38,18 @@ export class HomeComponent {
     avg_temp: 0,
     max_hum: 0,
     min_hum: 0,
-    avg_hum: 0,
+    avg_hum: 0
   };
 
   messages = {
     danger: 'The warehouse is temperature is above the limit',
     warning: 'The warehouse is temperature is close to the limit',
-    success: 'The warehouse is temperature is below the limit',
+    success: 'The warehouse is temperature is below the limit'
   };
 
   private database: Database = inject(Database);
 
-  constructor(private userService: UserService, private router: Router) {
-    console.log('Starting...');
-    console.log(this.warehouse.temperature);
-  }
+  constructor(private userService: UserService, private router: Router) {}
 
   getData() {
     const userId = this.userService.getUserUid();
@@ -60,19 +57,15 @@ export class HomeComponent {
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
     const Reading = query(readingsRef, orderByKey(), limitToLast(1));
 
-    onValue(Reading, (snapshot) => {
+    onValue(Reading, snapshot => {
       const readings = snapshot.val();
-      console.log('Showing Snapshot');
+
       if (snapshot.exists()) {
-        console.log(snapshot.val());
-        this.warehouse.temperature =
-          readings[Object.keys(readings)[0]].temperature;
-        this.warehouse.humidity = Math.floor(
-          readings[Object.keys(readings)[0]].humidity
-        );
-        console.log(this.warehouse.temperature);
+        this.warehouse.temperature = readings[Object.keys(readings)[0]].temperature;
+        this.warehouse.humidity = Math.floor(readings[Object.keys(readings)[0]].humidity);
       } else {
-        console.log('No data available');
+        this.warehouse.temperature = 0;
+        this.warehouse.humidity = 0;
       }
     });
   }
@@ -81,34 +74,23 @@ export class HomeComponent {
     const userId = this.userService.getUserUid();
 
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
-    const topReadingTemp = query(
-      readingsRef,
-      orderByChild('temperature'),
-      limitToLast(1)
-    );
-    const topReadingHumd = query(
-      readingsRef,
-      orderByChild('humidity'),
-      limitToLast(1)
-    );
+    const topReadingTemp = query(readingsRef, orderByChild('temperature'), limitToLast(1));
+    const topReadingHumd = query(readingsRef, orderByChild('humidity'), limitToLast(1));
 
-    onValue(topReadingTemp, (snapshot) => {
+    onValue(topReadingTemp, snapshot => {
       const readings = snapshot.val();
-      console.log('Showing Snapshot max temp');
+
       if (snapshot.exists()) {
-        console.log('Temp Max: ', snapshot.val());
-        this.warehouse.max_temp =
-          readings[Object.keys(readings)[0]].temperature;
+        this.warehouse.max_temp = readings[Object.keys(readings)[0]].temperature;
       } else {
         this.warehouse.max_temp = 0;
       }
     });
 
-    onValue(topReadingHumd, (snapshot) => {
+    onValue(topReadingHumd, snapshot => {
       const readings = snapshot.val();
-      console.log('Showing Snapshot max hum');
+
       if (snapshot.exists()) {
-        console.log('Hum Max: ', snapshot.val());
         this.warehouse.max_hum = readings[Object.keys(readings)[0]].humidity;
       } else {
         this.warehouse.max_hum = 0;
@@ -120,34 +102,23 @@ export class HomeComponent {
     const userId = this.userService.getUserUid();
 
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
-    const minReadingTemp = query(
-      readingsRef,
-      orderByChild('temperature'),
-      limitToFirst(1)
-    );
-    const minReadingHumd = query(
-      readingsRef,
-      orderByChild('humidity'),
-      limitToFirst(1)
-    );
+    const minReadingTemp = query(readingsRef, orderByChild('temperature'), limitToFirst(1));
+    const minReadingHumd = query(readingsRef, orderByChild('humidity'), limitToFirst(1));
 
-    onValue(minReadingTemp, (snapshot) => {
+    onValue(minReadingTemp, snapshot => {
       const readings = snapshot.val();
-      console.log('Showing Snapshot min temp');
+     
       if (snapshot.exists()) {
-        console.log('Min Temp: ', snapshot.val());
-        this.warehouse.min_temp =
-          readings[Object.keys(readings)[0]].temperature;
+        this.warehouse.min_temp = readings[Object.keys(readings)[0]].temperature;
       } else {
         this.warehouse.min_temp = 0;
       }
     });
 
-    onValue(minReadingHumd, (snapshot) => {
+    onValue(minReadingHumd, snapshot => {
       const readings = snapshot.val();
-      console.log('Showing Snapshot min hum');
+      
       if (snapshot.exists()) {
-        console.log('Min Hum: ', snapshot.val());
         this.warehouse.min_hum = readings[Object.keys(readings)[0]].humidity;
       } else {
         this.warehouse.min_hum = 0;
@@ -161,7 +132,7 @@ export class HomeComponent {
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
     const readingsQuery = query(readingsRef, orderByKey());
     // Avg calculation
-    onValue(readingsQuery, (snapshot) => {
+    onValue(readingsQuery, snapshot => {
       const readings = snapshot.val();
 
       let sumOfTemps = 0;
@@ -171,20 +142,14 @@ export class HomeComponent {
         sumOfHum += readings[readingKey].humidity;
       }
 
-      this.warehouse.avg_temp = Math.floor(
-        sumOfTemps / Object.keys(readings).length
-      );
-      this.warehouse.avg_hum = Math.floor(
-        sumOfHum / Object.keys(readings).length
-      );
-      console.log('Average Temp: ', this.warehouse.avg_temp);
-      console.log('Average Hum: ', this.warehouse.avg_hum);
+      this.warehouse.avg_temp = Math.floor(sumOfTemps / Object.keys(readings).length);
+      this.warehouse.avg_hum = Math.floor(sumOfHum / Object.keys(readings).length);
     });
   }
 
   ngOnInit(): void {
     this.data.uid = this.userService.getUserUid();
-    console.log(this.data.uid);
+ 
     this.getData();
     this.getMaxTemperature();
     this.getMinTempAndHum();
@@ -197,6 +162,6 @@ export class HomeComponent {
       .then(() => {
         this.router.navigate(['/login']);
       })
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   }
 }
