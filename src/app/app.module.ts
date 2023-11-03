@@ -38,7 +38,7 @@ import exporting from 'highcharts/modules/exporting.src';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {InventoryFilterComponent} from "./components/inventory/inventory-filter/inventory-filter.component";
 import { MatCardModule } from '@angular/material/card';
-
+import { MatSidenav } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [

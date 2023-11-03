@@ -43,4 +43,8 @@ export class UserService {
     return null;
   }
 
+  get isLoggedIn() {
+    return this.auth.currentUser != null;
+  }
+
 }

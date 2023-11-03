@@ -7,4 +7,23 @@ p {
 span {
     color: #fff;
 }
+ 
+ 
+mat-toolbar .active { 
+    color: var(--color-primary);
+    transition: color 0.5s ease-in-out;
+}
 
+/*display mobile menu only in mobile */
+@media (min-width: 768px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+/* hide nav links on mobile devices*/
+@media (max-width: 767px) {
+    .nav-links {
+        display: none;
+    }
+}

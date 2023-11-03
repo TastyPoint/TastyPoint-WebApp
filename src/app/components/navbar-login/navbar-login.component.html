@@ -1,13 +1,33 @@
 <p>
-    <mat-toolbar style="background-color: #401404; height: 80px; padding: 8px;">
-      <mat-toolbar-row>
-        <img src="../../../assets/logo_tastypoint.png" alt="" style="height: 70px; margin-right: 10px;">
-        <span style="font-family: 'Secular One', sans-serif;">TastyPoint Restaurants</span>
-        <span class="example-spacer"></span>
-        <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-          <mat-icon>menu</mat-icon>
-        </button> -->
-      </mat-toolbar-row>
-    </mat-toolbar>
+  <mat-toolbar style="background-color: #401404; height: 80px; padding: 8px;">
+    <mat-toolbar-row>
+      <img src="../../../assets/logo_tastypoint.png" alt="" style="height: 70px; margin-right: 10px;">
+      <span style="font-family: 'Secular One', sans-serif;">TastyPoint Restaurants</span>
+      <span class="example-spacer"></span>
+      <div class="nav-links">
+        <ul *ngIf="isLogged"
+          style="display: flex; flex-direction: row; list-style-type: none;  color:#fff; font-size: 18px; align-items: center;">
+          <li *ngFor="let link of navLinks" style="margin-right: 10px;">
+            <a mat-button [routerLink]="link.route" routerLinkActive="active"
+              style="text-decoration: none; ">{{link.label}}</a>
+          </li>
+
+
+          <li style="margin-top: 9px;">
+            <a mat-button (click)="logout()" style="cursor: pointer;  margin-bottom: 5px;">
+              Logout <mat-icon aria-hidden="false" aria-label="Logout" fontIcon="exit_to_app"></mat-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="mobile-menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon aria-label="Menu" fontIcon="menu" style="color: #fff;"></mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let link of navLinks" [routerLink]="link.route">{{ link.label }}</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </p>
-  
