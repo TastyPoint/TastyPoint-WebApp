@@ -1,9 +1,102 @@
-<p>INICIO HOME</p>
+<section class="section-warehouse">
+    <div class="container-warehouse">
+        <div class="flex flex-row ">
+            <h2 id="subtitle" style="color:#fff; text-align: start;">Warehouse</h2>
+            <span id="paragraph" style="color:#fff; font-family: 'Roboto', sans-serif;">Track the temperature metrics of
+                your warehouse</span>
+        </div>
+        <div className="row mt-5">
+            <div class="col-md-6">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <mat-card-title>Warehouse Temperature</mat-card-title>
+                            <mat-card-subtitle>Current temperature respect the restrictions</mat-card-subtitle>
+                            <img mat-card-sm-image
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSnQ11PBlabnP8fLSpllixv-eYZPKjbfwmsJLaZDQeY6MTalRO">
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{warehouse.temperature}} &plusmn; 0,5°C
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <mat-card-title>Warehouse Humidity</mat-card-title>
+                            <mat-card-subtitle>Current humidity respect the restrictions</mat-card-subtitle>
+                            <img mat-card-sm-image
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSnQ11PBlabnP8fLSpllixv-eYZPKjbfwmsJLaZDQeY6MTalRO">
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{warehouse.humidity}} &plusmn; 2%
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <mat-card-title>Warehouse Capacity</mat-card-title>
+                            <mat-card-subtitle>You have space in your Warehouse 😀</mat-card-subtitle>
+                            <img mat-card-sm-image
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFd9c67vNrogOlBWo_P6-8Bn6YXPpx9NPYSpOBHdpy0aU2CnL8">
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{warehouse.capacity}}/100 productos
+                    </mat-card-content>
+                </mat-card>
 
-<div style="display: flex;">
-    <p style="color: red;">Log out... </p>
-    <a (click)="logout()" style="cursor: pointer;">
-        <mat-icon aria-hidden="false" aria-label="Logout" fontIcon="exit_to_app"></mat-icon>
-    </a>
-</div>
+            </div>
 
+        </div>
+    </div>
+</section>
+<section class="section-metrics">
+    <div class="container-metrics" style="margin-top: 100px;">
+        <h2 id="subtitle" style="color:#fff ;">Temperature Metrics</h2>
+        <span id="paragraph" style="color:#fff ; font-family: 'Roboto', sans-serif;">Track the temperature metrics of
+            your warehouse</span>
+
+        <div class="list">
+            <div class="metric">
+                <p class="text-1">Average Temperature</p>
+                <p class="text-2">{{warehouse.avg_temp}}°C</p>
+                <p class="text-3">Variation: &plusmn; 0.5°C</p>
+            </div>
+            <div class="metric">
+                <p class="text-1">Maximum Temperature</p>
+                <p class="text-2">{{warehouse.max_temp}}°C</p>
+                <p class="text-3">Variation: &plusmn; 0.5°C</p>
+            </div>
+            <div class="metric">
+                <p class="text-1">Minimum Temperature</p>
+                <p class="text-2">{{warehouse.min_temp}}°C</p>
+                <p class="text-3">Variation: &plusmn; 0,5°C</p>
+            </div>
+        </div>
+        <h2 id="subtitle" style="color:#fff ;">Humedity Metrics</h2>
+        <span id="paragraph" style="color:#fff ; font-family: 'Roboto', sans-serif;">Track the humidity metrics of
+            your warehouse</span>
+
+        <div class="list">
+            <div class="metric">
+                <p class="text-1">Average Humidity</p>
+                <p class="text-2">{{warehouse.avg_hum}}°C</p>
+                <p class="text-3">Variation: &plusmn; 2%</p>
+            </div>
+            <div class="metric">
+                <p class="text-1">Maximum Humidity</p>
+                <p class="text-2">{{warehouse.max_hum}}°C</p>
+                <p class="text-3">Variation: &plusmn; 2%</p>
+            </div>
+            <div class="metric">
+                <p class="text-1">Minimum Humidity</p>
+                <p class="text-2">{{warehouse.min_hum}}C</p>
+                <p class="text-3">Variation: &plusmn; 2%</p>
+
+            </div>
+        </div>
+    </div>
+
+</section>
