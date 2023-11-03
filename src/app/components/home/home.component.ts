@@ -42,10 +42,10 @@ export class HomeComponent {
   };
 
   messages = {
-    danger: "The warehouse is temperature is above the limit",
-    warning: "The warehouse is temperature is close to the limit",
-    success: "The warehouse is temperature is below the limit"
-  }
+    danger: 'The warehouse is temperature is above the limit',
+    warning: 'The warehouse is temperature is close to the limit',
+    success: 'The warehouse is temperature is below the limit',
+  };
 
   private database: Database = inject(Database);
 
@@ -57,10 +57,8 @@ export class HomeComponent {
   getData() {
     const userId = this.userService.getUserUid();
 
-    //const dbRef = ref(this.database,'UsersData/'+value.userId+'/readings/'+value.timestamp+'/temperature');
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
     const Reading = query(readingsRef, orderByKey(), limitToLast(1));
-    //this.temperatureData = topReadingTemp;
 
     onValue(Reading, (snapshot) => {
       const readings = snapshot.val();
@@ -76,28 +74,12 @@ export class HomeComponent {
       } else {
         console.log('No data available');
       }
-
-      //this.temperatureData = snapshot.val();
     });
-
-    /* bRef.orderByKey().limitToLast(1).on('child_added', snapshot =>{
-      var jsonData = snapshot.toJSON(); // example: {temperature: 25.02, humidity: 50.20, pressure: 1008.48, timestamp:1641317355}
-      var temperature = jsonData.temperature;
-      var humidity = jsonData.humidity;
-      var pressure = jsonData.pressure;
-      var timestamp = jsonData.timestamp;
-      // Update DOM elements
-      tempElement.innerHTML = temperature;
-      humElement.innerHTML = humidity;
-      presElement.innerHTML = pressure;
-      updateElement.innerHTML = epochToDateTime(timestamp);
-    }); */
   }
 
   getMaxTemperature() {
     const userId = this.userService.getUserUid();
 
-    //const dbRef = ref(this.database,'UsersData/'+value.userId+'/readings/'+value.timestamp+'/temperature');
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
     const topReadingTemp = query(
       readingsRef,
@@ -109,7 +91,6 @@ export class HomeComponent {
       orderByChild('humidity'),
       limitToLast(1)
     );
-    //this.temperatureData = topReadingTemp;
 
     onValue(topReadingTemp, (snapshot) => {
       const readings = snapshot.val();
@@ -132,15 +113,12 @@ export class HomeComponent {
       } else {
         this.warehouse.max_hum = 0;
       }
-
-      //this.temperatureData = snapshot.val();
     });
   }
 
   getMinTempAndHum() {
     const userId = this.userService.getUserUid();
 
-    //const dbRef = ref(this.database,'UsersData/'+value.userId+'/readings/'+value.timestamp+'/temperature');
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
     const minReadingTemp = query(
       readingsRef,
@@ -152,8 +130,6 @@ export class HomeComponent {
       orderByChild('humidity'),
       limitToFirst(1)
     );
-    //const topReadingHumd = query(readingsRef, orderByChild('temperature'), limitToLast(1));
-    //this.temperatureData = topReadingTemp;
 
     onValue(minReadingTemp, (snapshot) => {
       const readings = snapshot.val();
@@ -182,7 +158,6 @@ export class HomeComponent {
   calculateAverage() {
     const userId = this.userService.getUserUid();
 
-    //const dbRef = ref(this.database,'UsersData/'+value.userId+'/readings/'+value.timestamp+'/temperature');
     const readingsRef = ref(this.database, 'users/' + userId + '/readings');
     const readingsQuery = query(readingsRef, orderByKey());
     // Avg calculation
@@ -206,11 +181,6 @@ export class HomeComponent {
       console.log('Average Hum: ', this.warehouse.avg_hum);
     });
   }
-
-  // Method to calculate average temperature from all readings
-
-  // Obtener user uuid
-  // Obtener ultimo registro de la lista y su temperatura
 
   ngOnInit(): void {
     this.data.uid = this.userService.getUserUid();
