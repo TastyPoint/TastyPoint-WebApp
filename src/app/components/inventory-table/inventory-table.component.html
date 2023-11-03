@@ -23,7 +23,7 @@
     </div>
 
 
-    <app-register-inventory [onCreate]="this" *ngIf="isRegister"></app-register-inventory>
+    <app-register-inventory [onCreate]="this" *ngIf="isRegister" (cancelRegister)="handleCancelRegister()"></app-register-inventory>
 
     <app-update-inventory [onUpdate]="this" [product]="editProduct" *ngIf="isEdit; else inventory"></app-update-inventory>
     <ng-template #inventory>

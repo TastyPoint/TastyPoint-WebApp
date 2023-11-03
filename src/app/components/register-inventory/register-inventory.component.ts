@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {ProductsService} from "../../services/products.service";
 import {Product, ProductCollection} from "../../models/product.model";
@@ -13,6 +13,8 @@ export interface CreateItemCallback {
   styleUrls: ['./register-inventory.component.css']
 })
 export class RegisterInventoryComponent {
+
+  @Output() cancelRegister = new EventEmitter<void>();
 
   formAddProduct: FormGroup;
 
@@ -40,5 +42,11 @@ export class RegisterInventoryComponent {
 
     this.onCreate.afterCreate(this.productService.create(product))
   }
+
+  
+  onCancel() {
+    this.cancelRegister.emit();
+  }
+  
 
 }

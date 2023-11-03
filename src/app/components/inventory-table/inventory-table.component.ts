@@ -88,4 +88,7 @@ export class InventoryTableComponent implements OnInit, InventoryFilterCallback,
     this.isRegister = false;
   }
 
+  handleCancelRegister() {
+    this.isRegister = false;
+  }
 }
