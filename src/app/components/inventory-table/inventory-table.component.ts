@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -8,6 +8,9 @@ import {ProductsService} from "../../services/products.service";
 import {UpdateItemCallback} from "../update-inventory/update-inventory.component";
 import {CreateItemCallback} from "../register-inventory/register-inventory.component";
 
+export class GlobalState {
+  public static totalProducts: number;
+}
 
 @Component({
   selector: 'app-inventory-table',
@@ -21,6 +24,7 @@ export class InventoryTableComponent implements OnInit, InventoryFilterCallback,
   @ViewChild(MatSort, { static: false }) sort!: MatSort; // Utiliza "!" para indicar que se inicializará más tarde
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator; // Utiliza "!" para indicar que se inicializará más tarde
 
+  totalProducts: number=0;
 
   data: ProductCollection[] = [];
 
@@ -37,9 +41,11 @@ export class InventoryTableComponent implements OnInit, InventoryFilterCallback,
     this.productsService.getAll()
       .then(data => {
         this.dataSource.data = data;
-        this.data = [...this.dataSource.data]
+        this.data = [...this.dataSource.data];
+        this.totalProducts = this.data.length;
         this.dataSource.sort = this.sort; // Utiliza "sort" sin problemas
-        this.dataSource.paginator = this.paginator; // Utiliza "paginator" sin problemas
+        this.dataSource.paginator = this.paginator; // Utiliza "paginator" sin problemas  
+        GlobalState.totalProducts = this.data.length; 
       });
   }
 
@@ -47,11 +53,14 @@ export class InventoryTableComponent implements OnInit, InventoryFilterCallback,
     this.productsService.delete(id)
     this.data = this.data.filter(it => it.uid != id);
     this.dataSource.data = [...this.data];
+    this.totalProducts = this.data.length;
+    GlobalState.totalProducts = this.data.length;
   }
 
   updateProduct(product: ProductCollection) {
     this.editProduct = product;
     this.isEdit = true;
+    
   }
 
   onSearch(options: InventoryFilterOptions): void {
@@ -62,6 +71,7 @@ export class InventoryTableComponent implements OnInit, InventoryFilterCallback,
 
   onReset(): void {
     this.dataSource.data = this.data;
+    
   }
 
   onCancel(): void {
@@ -70,6 +80,7 @@ export class InventoryTableComponent implements OnInit, InventoryFilterCallback,
 
   afterUpdated(product: ProductCollection): void {
     this.isEdit = false;
+    
   }
 
   back() {
@@ -86,6 +97,16 @@ export class InventoryTableComponent implements OnInit, InventoryFilterCallback,
     this.data.push(product);
     this.dataSource.data.push(product);
     this.isRegister = false;
+    this.totalProducts = this.data.length;
+    GlobalState.totalProducts = this.data.length;
   }
 
+  handleCancelRegister() {
+    this.isRegister = false;
+  }
+
+
+ 
+
+  
 }

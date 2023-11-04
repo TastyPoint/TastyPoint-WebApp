@@ -3,6 +3,7 @@ import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/databas
 import {UserService} from "./user.service";
 import {FirebaseService} from "./firebase.service";
 import {Product} from "../models/product.model";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,5 @@ export class ProductsService extends FirebaseService<Product>{
     const user = userService.getCurrentUser();
     super(`products/${user?.uid}`, db)
   }
-
 
 }
